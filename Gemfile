@@ -38,3 +38,7 @@ gem 'jquery-rails'
 
 gem 'mongo_mapper'
 gem 'bson_ext'
+
+group :test do
+  gem 'shoulda'
+end
