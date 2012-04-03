@@ -9,4 +9,5 @@ class CarTest < ActiveSupport::TestCase
 	should validate_numericality_of :yearModel
 
 	should validate_presence_of :price
+	should validate_numericality_of :price
 end
