@@ -1,7 +1,10 @@
 require 'test_helper'
 
 class CarTest < ActiveSupport::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
+	test "should get initial cars" do
+		car = Car.new(:licenceNumber => "XYZ-123")
+		car.save
+
+		assert_equal 1, Car.all.size
+	end
 end
