@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  licenceNumber: MyString
+  model: MyString
+  yearModel: MyString
+  price: 1.5
+
+two:
+  licenceNumber: MyString
+  model: MyString
+  yearModel: MyString
+  price: 1.5
