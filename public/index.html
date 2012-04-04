@@ -1,72 +1,100 @@
 <!DOCTYPE html>
 <html>
     <head>
-	<meta charset="utf-8"/>
-	<title>Cardealer Demo KO</title>
-	<link rel="stylesheet" href="bootstrap/css/bootstrap.css"/>
+        <meta charset="utf-8"/>
+        <title>Cardealer Demo KO</title>
+        <link rel="stylesheet" href="bootstrap/css/bootstrap.css"/>
     </head>
     <body>
-	<div class="container">
-	    <h1>Cardealer Demo KO</h1>
-	    <p class="lead">with Knockout, Rails and MongoDB</p>
-	    <ul class="nav nav-pills">
-		<li class="active"><a href="#vendible-cars" data-toggle="pill">Vendible cars</a></li>
-		<li><a href="#sold-cars" data-toggle="pill">Sold cars</a></li>
-	    </ul>
-	    <div class="tab-content">
-		<div id="vendible-cars" class="tab-pane active">
-		    <table class="table table-bordered">
-			<thead>
-			    <tr>
-				<td colspan="4">
-				    <a href="#">Add new car</a>
-				</td>
-			    </tr>
-			    <tr>
-				<th>Model</th>
-				<th>Year model</th>
-				<th>Licence number</th>
-				<th>Price</th>
-			    </tr>
-			</thead>
-			<tbody data-bind="foreach: vendibleCars()">
-			    <tr>
-				<td data-bind="text: model"></td>
-				<td data-bind="text: yearModel"></td>
-				<td data-bind="text: licenceNumber"></td>
-				<td data-bind="text: price"></td>
-			    </tr>
-			</tbody>
-		    </table>
-		</div>
-		<div id="sold-cars" class="tab-pane">
-		    <table class="table table-bordered">
-			<thead>
-			    <tr>
-				<th>Customer</th>
-				<th>Model</th>
-				<th>Year model</th>
-				<th>Licence number</th>
-				<th>Price</th>
-			    </tr>
-			</thead>
-			<tbody data-bind="foreach: soldCars()">
-			    <tr>
-				<td data-bind="text: saleContract().customer"></td>
-				<td data-bind="text: model"></td>
-				<td data-bind="text: yearModel"></td>
-				<td data-bind="text: licenceNumber"></td>
-				<td data-bind="text: saleContract().price"></td>
-			    </tr>
-			</tbody>
-		    </table>
-		</div>
-	    </div>
-	</div>
-	<script src="js/jquery-1.7.2.js"></script>
-	<script src="js/underscore-min.js"></script>
-	<script src="js/knockout-2.0.0.debug.js"></script>
-	<script src="bootstrap/js/bootstrap.js"></script>
-	<script src="js/cardealer.js"></script>
+        <div class="container">
+            <h1>Cardealer Demo KO</h1>
+            <p class="lead">with Knockout, Rails and MongoDB</p>
+            <ul class="nav nav-pills">
+                <li class="active"><a href="#vendible-cars" data-toggle="pill">Vendible cars</a></li>
+                <li><a href="#sold-cars" data-toggle="pill">Sold cars</a></li>
+            </ul>
+            <div class="tab-content">
+                <div id="vendible-cars" class="tab-pane active">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <td colspan="4">
+                                    <a href="#">Add new car</a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>Model</th>
+                                <th>Year model</th>
+                                <th>Licence number</th>
+                                <th>Price</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody data-bind="foreach: vendibleCars()">
+                            <tr>
+                                <td data-bind="text: model"></td>
+                                <td data-bind="text: yearModel"></td>
+                                <td data-bind="text: licenceNumber"></td>
+                                <td data-bind="text: price"></td>
+                                <td><a href="#sell-modal" data-bind="click: $parent.carToSell" data-toggle="modal">Sell</a></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div id="sold-cars" class="tab-pane">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Customer</th>
+                                <th>Model</th>
+                                <th>Year model</th>
+                                <th>Licence number</th>
+                                <th>Price</th>
+                            </tr>
+                        </thead>
+                        <tbody data-bind="foreach: soldCars()">
+                            <tr>
+                                <td data-bind="text: saleContract().customer"></td>
+                                <td data-bind="text: model"></td>
+                                <td data-bind="text: yearModel"></td>
+                                <td data-bind="text: licenceNumber"></td>
+                                <td data-bind="text: saleContract().price"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div id="sell-modal" class="modal fade">
+                    <div class="modal-header">
+                        <a class="close" data-dismiss="modal">×</a>
+                        <h3>Sell car <span data-bind="text: carToSell().licenceNumber"></span></h3>
+                    </div>
+                    <div class="modal-body">
+                        <form class="form-horizontal">
+                            <div class="control-group">
+                                <label class="control-label">Customer name</label>
+                                <div class="controls">
+                                    <input type="text" class="span3" id="sale_contract[customer]"/>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label">Price</label>
+                                <div class="controls">
+                                    <input type="text" class="span3" id="sale_contract[price]"/>
+                                </div>
+                            </div>
+                         </form>
+                    </div>
+                    <div class="modal-footer">
+                        <a href="#" class="btn">Cancel</a>
+                        <a href="#" class="btn btn-primary">Sell</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script src="js/jquery-1.7.2.js"></script>
+        <script src="js/underscore-min.js"></script>
+        <script src="js/knockout-2.0.0.debug.js"></script>
+        <script src="bootstrap/js/bootstrap.js"></script>
+        <script src="js/cardealer.js"></script>
     </body>
 </html>
