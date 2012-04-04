@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
-  <head>
+	<head>
+	<meta charset="utf-8"/>
 	  <title>Cardealer Demo KO</title>
 	  <link rel="stylesheet" href="bootstrap/css/bootstrap.css"/>
   </head>
@@ -10,12 +11,10 @@
 		  <h1>Cardealer Demo KO</h1>
 		  <p class="lead">with Knockout, Rails and MongoDB</p>
 		  </header>
-		  <section id="nav">
 		  <ul class="nav nav-pills">
 			  <li class="active"><a href="#vendible-cars" data-toggle="pill">Vendible cars</a></li>
-			<li><a href="#sale-contracts" data-toggle="pill">Sale contracts</a></li>
+			<li><a href="#sold-cars" data-toggle="pill">Sold cars</a></li>
 		</ul>
-		</section>
 		<div class="tab-content">
 		<div id="vendible-cars" class="tab-pane active">
 			<table class="table table-bordered">
@@ -42,7 +41,7 @@
 				</tbody>
 			</table>
 		</div>
-		<div id="sale-contracts" class="tab-pane">
+		<div id="sold-cars" class="tab-pane">
 			<table class="table table-bordered">
 				<thead>
 					<tr>
@@ -53,11 +52,21 @@
 						<th>Price</th>
 					</tr>
 				</thead>
+				<tbody data-bind="foreach: soldCars()">
+					<tr>
+						<td data-bind="text: saleContract().customer"></td>
+						<td data-bind="text: model"></td>
+						<td data-bind="text: yearModel"></td>
+						<td data-bind="text: licenceNumber"></td>
+						<td data-bind="text: saleContract().price"></td>
+					</tr>
+				</tbody>
 			</table>
 		</div>
 		</div>
 	</div>
 	  <script src="js/jquery-1.7.2.js"></script>
+	  <script src="js/underscore-min.js"></script>
 	  <script src="js/knockout-2.0.0.debug.js"></script>
 	  <script src="bootstrap/js/bootstrap.js"></script>
 	  <script src="js/cardealer.js"></script>
