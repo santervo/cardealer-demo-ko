@@ -12,11 +12,12 @@
 		  </header>
 		  <section id="nav">
 		  <ul class="nav nav-pills">
-			  <li class="active"><a href="#vendible-cars">Cars</a></li>
-			<li><a href="#sale-contracts">Sale contracts</a></li>
+			  <li class="active"><a href="#vendible-cars" data-toggle="pill">Vendible cars</a></li>
+			<li><a href="#sale-contracts" data-toggle="pill">Sale contracts</a></li>
 		</ul>
 		</section>
-		<section id="vendible-cars">
+		<div class="tab-content">
+		<div id="vendible-cars" class="tab-pane active">
 			<table class="table table-bordered">
 				<thead>
 					<tr>
@@ -32,7 +33,23 @@
 					</tr>
 				</thead>
 			</table>
-		</section>
+		</div>
+		<div id="sale-contracts" class="tab-pane">
+			<table class="table table-bordered">
+				<thead>
+					<tr>
+						<th>Customer</th>
+						<th>Model</th>
+						<th>Year model</th>
+						<th>Licence number</th>
+						<th>Price</th>
+					</tr>
+				</thead>
+			</table>
+		</div>
+		</div>
 	</div>
+	  <script src="js/jquery-1.7.2.js"></script>
+	  <script src="bootstrap/js/bootstrap.js"></script>
   </body>
 </html>
