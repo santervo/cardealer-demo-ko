@@ -33,6 +33,18 @@ $(document).ready(function() {
             return _.filter(self.cars(), function(car) { return car.isSold();});
         };
         self.carToSell = ko.observable();
+        self.saleContract = ko.observable();
+        self.sellModal = $("#sell-modal");
+        self.sellButtonClicked = function(car) {
+            self.saleContract(new SaleContract);
+            self.carToSell(car);
+            self.sellModal.modal("show");
+        };
+        self.sellCar = function() {
+            self.carToSell().saleContract(self.saleContract());
+            self.carToSell(null);
+            self.sellModal.modal("hide");
+        };
     }
 
     ko.applyBindings(new CarDealerViewModel());

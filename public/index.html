@@ -36,7 +36,7 @@
                                 <td data-bind="text: yearModel"></td>
                                 <td data-bind="text: licenceNumber"></td>
                                 <td data-bind="text: price"></td>
-                                <td><a href="#sell-modal" data-bind="click: $parent.carToSell" data-toggle="modal">Sell</a></td>
+                                <td><a href="#sell-modal" data-bind="click: $parent.sellButtonClicked">Sell</a></td>
                             </tr>
                         </tbody>
                     </table>
@@ -64,29 +64,29 @@
                     </table>
                 </div>
                 <div id="sell-modal" class="modal fade">
-                    <div class="modal-header">
+                    <div class="modal-header" data-bind="if: carToSell">
                         <a class="close" data-dismiss="modal">×</a>
                         <h3>Sell car <span data-bind="text: carToSell().licenceNumber"></span></h3>
                     </div>
-                    <div class="modal-body">
+                    <div class="modal-body" data-bind="if: saleContract">
                         <form class="form-horizontal">
                             <div class="control-group">
                                 <label class="control-label">Customer name</label>
                                 <div class="controls">
-                                    <input type="text" class="span3" id="sale_contract[customer]"/>
+                                    <input type="text" class="span3" data-bind="value: saleContract().customer"/>
                                 </div>
                             </div>
                             <div class="control-group">
                                 <label class="control-label">Price</label>
                                 <div class="controls">
-                                    <input type="text" class="span3" id="sale_contract[price]"/>
+                                    <input type="text" class="span3" data-bind="value: saleContract().price"/>
                                 </div>
                             </div>
                          </form>
                     </div>
                     <div class="modal-footer">
-                        <a href="#" class="btn">Cancel</a>
-                        <a href="#" class="btn btn-primary">Sell</a>
+                        <a href="#" class="btn" data-dismiss="modal">Cancel</a>
+                        <a href="#" class="btn btn-primary" data-bind="click: sellCar">Sell</a>
                     </div>
                 </div>
             </div>
