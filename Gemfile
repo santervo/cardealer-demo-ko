@@ -39,6 +39,8 @@ gem 'jquery-rails'
 gem 'mongo_mapper'
 gem 'bson_ext'
 
+gem 'less-rails-bootstrap'
+
 group :test do
   gem 'shoulda'
 end
