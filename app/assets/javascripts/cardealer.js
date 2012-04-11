@@ -1,21 +1,38 @@
 $(document).ready(function() {
-    var SaleContract = function(customer, price) {
+    var SaleContract = function(customer, price, status) {
         this.customer = ko.observable(customer);
         this.price = ko.observable(price);
     };
     var Car = function(model, yearModel, licenceNumber, price, saleContract) {
+        var self = this;
+
         this.model = ko.observable(model);
         this.yearModel = ko.observable(yearModel);
         this.licenceNumber = ko.observable(licenceNumber);
         this.price = ko.observable(price);
         this.saleContract = ko.observable(saleContract);
-        var self = this;
-        this.isVendible = ko.computed(function() {
-            return !self.saleContract();
-        });
-        this.isSold = ko.computed(function() {
+        this.preparedContract = ko.observable();
+
+        this.sold = ko.computed(function() {
             return !!self.saleContract();
         });
+
+        this.prepared = ko.computed(function() {
+            return !!self.preparedContract();
+        });
+
+        this.sell = function() {
+            self.preparedContract(new SaleContract);
+        };
+
+        this.confirm = function() {
+            self.saleContract(self.preparedContract());
+            self.preparedContract(null);
+        };
+
+        this.revoke = function() {
+            self.preparedContract(null);
+        };
     };
 
     var CarDealerViewModel = function() {
@@ -27,27 +44,18 @@ $(document).ready(function() {
                     new SaleContract("Matti Meikäläinen", 6900.0))
                 ]);
         self.vendibleCars = function() {
-            return _.filter(self.cars(), function(car) { return car.isVendible();});
+            return _.filter(self.cars(), function(car) { return !car.sold();});
         };
         self.soldCars = function() {
-            return _.filter(self.cars(), function(car) { return car.isSold();});
+            return _.filter(self.cars(), function(car) { return car.sold();});
         };
+        self.carToSell = ko.computed(function() {
+            return _.find(self.vendibleCars(), function(car) {
+                return car.prepared();
+            });
+        });
+    };
 
-        self.carToSell = ko.observable();
-        self.saleContract = ko.observable();
-
-        self.sell = function(car) {
-            self.saleContract(new SaleContract);
-            self.carToSell(car);
-        };
-        self.confirm = function() {
-            self.carToSell().saleContract(self.saleContract());
-            self.carToSell(null);
-        };
-        self.revoke = function() {
-            self.carToSell(null);
-        };
-    }
     ko.bindingHandlers.showModal = {
         init: function(element, valueAccessor) {
                   var value = ko.utils.unwrapObservable(valueAccessor());

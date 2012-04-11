@@ -28,7 +28,7 @@
                         <td data-bind="text: yearModel"></td>
                         <td data-bind="text: licenceNumber"></td>
                         <td data-bind="text: price"></td>
-                        <td><a href="#sell-modal" data-bind="click: $parent.sell">Sell</a></td>
+                        <td><a data-bind="click: sell">Sell</a></td>
                     </tr>
                 </tbody>
             </table>
@@ -55,23 +55,23 @@
                 </tbody>
             </table>
         </div>
-        <div id="sell-modal" class="modal fade" data-bind="showModal: carToSell">
-            <div class="modal-header" data-bind="if: carToSell">
+        <div id="sell-modal" class="modal fade" data-bind="showModal: carToSell, with: carToSell">
+            <div class="modal-header">
                 <a class="close" data-bind="click: revoke">×</a>
-                <h3>Sell car <span data-bind="text: carToSell().licenceNumber"></span></h3>
+                <h3>Sell car <span data-bind="text: licenceNumber"></span></h3>
             </div>
-            <div class="modal-body" data-bind="if: saleContract">
+            <div class="modal-body" data-bind="with: preparedContract">
                 <form class="form-horizontal">
                     <div class="control-group">
                         <label class="control-label">Customer name</label>
                         <div class="controls">
-                            <input type="text" class="span3" data-bind="value: saleContract().customer"/>
+                            <input type="text" class="span3" data-bind="value: customer"/>
                         </div>
                     </div>
                     <div class="control-group">
                         <label class="control-label">Price</label>
                         <div class="controls">
-                            <input type="text" class="span3" data-bind="value: saleContract().price"/>
+                            <input type="text" class="span3" data-bind="value: price"/>
                         </div>
                     </div>
                 </form>
