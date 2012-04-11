@@ -32,10 +32,11 @@ $(document).ready(function() {
         self.soldCars = function() {
             return _.filter(self.cars(), function(car) { return car.isSold();});
         };
+
         self.carToSell = ko.observable();
         self.saleContract = ko.observable();
-        self.sellModal = $("#sell-modal");
-        self.sellButtonClicked = function(car) {
+
+        self.sell = function(car) {
             self.saleContract(new SaleContract);
             self.carToSell(car);
         };
