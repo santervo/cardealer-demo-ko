@@ -55,7 +55,7 @@
                 </tbody>
             </table>
         </div>
-        <div id="sell-modal" class="modal fade">
+        <div id="sell-modal" class="modal fade" data-bind="showModal: carToSell">
             <div class="modal-header" data-bind="if: carToSell">
                 <a class="close" data-dismiss="modal">×</a>
                 <h3>Sell car <span data-bind="text: carToSell().licenceNumber"></span></h3>

@@ -23,7 +23,7 @@ $(document).ready(function() {
         self.cars = ko.observableArray([
                 new Car("Honda", 2001, "XYZ-123", 3500.0),
                 new Car("Citroen", 2004, "FGE-123", 5000.0),
-                 new Car("Toyota", 2005, "ABC-123", 7000.0, 
+                new Car("Toyota", 2005, "ABC-123", 7000.0, 
                     new SaleContract("Matti Meikäläinen", 6900.0))
                 ]);
         self.vendibleCars = function() {
@@ -38,14 +38,24 @@ $(document).ready(function() {
         self.sellButtonClicked = function(car) {
             self.saleContract(new SaleContract);
             self.carToSell(car);
-            self.sellModal.modal("show");
         };
         self.sellCar = function() {
             self.carToSell().saleContract(self.saleContract());
             self.carToSell(null);
-            self.sellModal.modal("hide");
         };
     }
+    ko.bindingHandlers.showModal = {
+        init: function(element, valueAccessor) {
+                  var value = ko.utils.unwrapObservable(valueAccessor());
+                   if (value) {
+                      $(element).modal("show");
+                  }
+              },
+        update: function(element, valueAccessor) {
+                    var value = ko.utils.unwrapObservable(valueAccessor());
+                    $(element).modal(value ? "show" : "hide");
+                }
+    };
 
     ko.applyBindings(new CarDealerViewModel());
 });
