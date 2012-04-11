@@ -57,7 +57,7 @@
         </div>
         <div id="sell-modal" class="modal fade" data-bind="showModal: carToSell">
             <div class="modal-header" data-bind="if: carToSell">
-                <a class="close" data-dismiss="modal">×</a>
+                <a class="close" data-bind="click: revoke">×</a>
                 <h3>Sell car <span data-bind="text: carToSell().licenceNumber"></span></h3>
             </div>
             <div class="modal-body" data-bind="if: saleContract">
@@ -77,8 +77,8 @@
                 </form>
             </div>
             <div class="modal-footer">
-                <a href="#" class="btn" data-dismiss="modal">Cancel</a>
-                <a href="#" class="btn btn-primary" data-bind="click: sellCar">Sell</a>
+                <a href="#" class="btn" data-bind="click: revoke">Cancel</a>
+                <a href="#" class="btn btn-primary" data-bind="click: confirm">Sell</a>
             </div>
         </div>
     </div>

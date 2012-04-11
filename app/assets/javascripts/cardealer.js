@@ -39,8 +39,11 @@ $(document).ready(function() {
             self.saleContract(new SaleContract);
             self.carToSell(car);
         };
-        self.sellCar = function() {
+        self.confirm = function() {
             self.carToSell().saleContract(self.saleContract());
+            self.carToSell(null);
+        };
+        self.revoke = function() {
             self.carToSell(null);
         };
     }
