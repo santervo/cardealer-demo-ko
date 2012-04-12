@@ -14,5 +14,6 @@
 //= require jquery_ujs
 //= require_tree .
 //= require knockout
+//= require knockout.mapping
 //= require underscore
 //= require twitter/bootstrap
