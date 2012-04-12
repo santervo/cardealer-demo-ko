@@ -22,13 +22,13 @@
                         <th></th>
                     </tr>
                 </thead>
-                <tbody data-bind="foreach: vendibleCars()">
+                <tbody data-bind="foreach: cars">
                     <tr>
                         <td data-bind="text: model"></td>
                         <td data-bind="text: yearModel"></td>
                         <td data-bind="text: licenceNumber"></td>
                         <td data-bind="text: price"></td>
-                        <td><a data-bind="click: sell">Sell</a></td>
+                        <td><a data-bind="click: $root.sell">Sell</a></td>
                     </tr>
                 </tbody>
             </table>
@@ -44,23 +44,23 @@
                         <th>Price</th>
                     </tr>
                 </thead>
-                <tbody data-bind="foreach: soldCars()">
+                <tbody data-bind="foreach: saleContracts">
                     <tr>
-                        <td data-bind="text: saleContract().customer"></td>
-                        <td data-bind="text: model"></td>
-                        <td data-bind="text: yearModel"></td>
-                        <td data-bind="text: licenceNumber"></td>
-                        <td data-bind="text: saleContract().price"></td>
+                        <td data-bind="text: customer"></td>
+                        <td data-bind="text: car.model"></td>
+                        <td data-bind="text: car.yearModel"></td>
+                        <td data-bind="text: car.licenceNumber"></td>
+                        <td data-bind="text: price"></td>
                     </tr>
                 </tbody>
             </table>
         </div>
-        <div id="sell-modal" class="modal fade" data-bind="showModal: carToSell, with: carToSell">
+        <div id="sell-modal" class="modal fade" data-bind="showModal: newSaleContract, with: newSaleContract">
             <div class="modal-header">
-                <a class="close" data-bind="click: revoke">×</a>
-                <h3>Sell car <span data-bind="text: licenceNumber"></span></h3>
+                <a class="close" data-bind="click: $root.cancel">×</a>
+                <h3>Sell car <span data-bind="text: car.licenceNumber"></span></h3>
             </div>
-            <div class="modal-body" data-bind="with: preparedContract">
+            <div class="modal-body">
                 <form class="form-horizontal">
                     <div class="control-group">
                         <label class="control-label">Customer name</label>
@@ -77,8 +77,8 @@
                 </form>
             </div>
             <div class="modal-footer">
-                <a href="#" class="btn" data-bind="click: revoke">Cancel</a>
-                <a href="#" class="btn btn-primary" data-bind="click: confirm">Sell</a>
+                <a href="#" class="btn" data-bind="click: $root.cancel">Cancel</a>
+                <a href="#" class="btn btn-primary" data-bind="click: $root.confirm">Sell</a>
             </div>
         </div>
     </div>
