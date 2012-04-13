@@ -43,4 +43,5 @@ gem 'less-rails-bootstrap'
 
 group :test do
   gem 'shoulda'
+  gem 'factory_girl_rails'
 end
