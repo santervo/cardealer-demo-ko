@@ -36,7 +36,7 @@ gem 'jquery-rails'
 # To use debugger
 # gem 'ruby-debug19', :require => 'ruby-debug'
 
-gem 'mongo_mapper'
+gem 'mongoid'
 gem 'bson_ext'
 
 gem 'less-rails-bootstrap'

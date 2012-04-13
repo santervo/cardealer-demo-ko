@@ -1,12 +1,10 @@
 class Car
-  include MongoMapper::Document
+  include Mongoid::Document
 
-  key :licenceNumber, String, :required => true
-  key :model, String, :required => true
-  key :yearModel, Integer, :required => true, :numeric => true
-  key :price, Float, :required => true, :numeric => true
-  one :sale_contract
+  field :licenceNumber, type: String
+  field :model, type: String
+  field :yearModel, type: Integer
 
-  validates_associated :sale_contract
-
+  validates_presence_of :model, :licenceNumber, :yearModel
+  validates_numericality_of :yearModel
 end
