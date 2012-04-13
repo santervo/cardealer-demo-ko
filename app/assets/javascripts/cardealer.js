@@ -12,17 +12,8 @@ $(document).ready(function() {
 
     var CarDealerViewModel = function() {
         var self = this;
-        self.vendibleCars = ko.observableArray([
-                new VendibleCar({
-                    car: {model: "Honda", yearModel: 2001, licenceNumber: "XYZ-123"}, 
-                    price: 3500.0}),
-                new VendibleCar({
-                    car: {model: "Citroen", yearModel: 2004, licenceNumber: "FGE-123"}, 
-                    price: 3500.0})]);
-        self.saleContracts = ko.observableArray([
-                new SaleContract({
-                    car: {model: "Toyota", yearModel: 2005, licenceNumber: "ABC-123"}, 
-                    customer: "Matti Meikäläinen", price: 7000.0})]);
+        self.vendibleCars = ko.observableArray();
+        self.saleContracts = ko.observableArray();
         self.saleTransaction = ko.observable();
         self.sell = function(vendibleCar) {
             self.saleTransaction(new SaleTransaction(vendibleCar));
@@ -35,6 +26,13 @@ $(document).ready(function() {
         self.cancel = function() {
             self.saleTransaction(null);
         };
+
+        // Get initial cars
+        $.get("/vendible_cars", function(data) {
+            _.each(data, function(obj) {
+                self.vendibleCars.push(new VendibleCar(obj));
+            });
+        });
     };
 
     ko.bindingHandlers.showModal = {
