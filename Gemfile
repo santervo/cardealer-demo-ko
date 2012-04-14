@@ -38,7 +38,7 @@ gem 'jquery-rails'
 
 gem 'mongoid'
 gem 'bson_ext'
-
+gem 'rabl'
 gem 'less-rails-bootstrap'
 
 group :test do
