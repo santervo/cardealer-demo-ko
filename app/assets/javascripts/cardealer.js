@@ -49,19 +49,6 @@ $(document).ready(function() {
         };
      }
 
-    ko.bindingHandlers.showModal = {
-        init: function(element, valueAccessor) {
-                  var value = ko.utils.unwrapObservable(valueAccessor());
-                   if (value) {
-                      $(element).modal("show");
-                  }
-              },
-        update: function(element, valueAccessor) {
-                    var value = ko.utils.unwrapObservable(valueAccessor());
-                    $(element).modal(value ? "show" : "hide");
-                }
-    };
-
     var viewModel = new CarDealerViewModel;
     viewModel.fetch();
     ko.applyBindings(viewModel);

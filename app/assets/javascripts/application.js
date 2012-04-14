@@ -15,5 +15,6 @@
 //= require_tree .
 //= require knockout
 //= require knockout.mapping
+//= require knockout.bootstrap
 //= require underscore
 //= require twitter/bootstrap
