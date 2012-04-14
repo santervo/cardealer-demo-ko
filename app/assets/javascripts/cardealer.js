@@ -21,7 +21,7 @@ $(document).ready(function() {
         });
         self.saleForm = ko.observable();
         self.sell = function(sale) {
-            self.saleForm(new SaleFormViewModel(sale, self));
+            self.saleForm(new SaleFormViewModel(sale, self.saleForm));
         };
         self.fetch = function() {
             $.get("/car_sales", function(data) {
@@ -36,10 +36,13 @@ $(document).ready(function() {
         self.car = sale.car();
         self.saleContract = new SaleContract;
         self.confirm = function() {
-            $.post("/car_sales/" + sale._id() + "/sale_contract", function() {
-                sale.saleContract(self.saleContract);
-                container(null);
-            });
+            var path = "/car_sales/" + sale._id() + "/sale_contract";
+            var data = {sale_contract: ko.mapping.toJS(self.saleContract)};
+            $.post(path, data, self.saveSuccess);
+        };
+        self.saveSuccess = function() {
+            sale.saleContract(self.saleContract);
+            container(null);
        };
         self.cancel = function() {
             container(null);

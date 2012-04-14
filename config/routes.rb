@@ -3,6 +3,8 @@ CardealerDemoKo::Application.routes.draw do
 
     match 'car_sales' => 'car_sales#index'
 
+    match 'car_sales/:id/sale_contract' => 'car_sales#save_contract'
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
