@@ -22,11 +22,11 @@
                         <th></th>
                     </tr>
                 </thead>
-                <tbody data-bind="foreach: vendibleCars">
+                <tbody data-bind="foreach: openSales">
                     <tr>
-                        <td data-bind="text: car.model"></td>
-                        <td data-bind="text: car.yearModel"></td>
-                        <td data-bind="text: car.licenceNumber"></td>
+                        <td data-bind="text: car().model"></td>
+                        <td data-bind="text: car().yearModel"></td>
+                        <td data-bind="text: car().licenceNumber"></td>
                         <td data-bind="text: price"></td>
                         <td><a data-bind="click: $root.sell">Sell</a></td>
                     </tr>
@@ -44,24 +44,23 @@
                         <th>Price</th>
                     </tr>
                 </thead>
-                <tbody data-bind="foreach: saleContracts">
+                <tbody data-bind="foreach: finishedSales">
                     <tr>
-                        <td data-bind="text: customer"></td>
-                        <td data-bind="text: car.model"></td>
-                        <td data-bind="text: car.yearModel"></td>
-                        <td data-bind="text: car.licenceNumber"></td>
-                        <td data-bind="text: price"></td>
+                        <td data-bind="text: saleContract().customer"></td>
+                        <td data-bind="text: car().model"></td>
+                        <td data-bind="text: car().yearModel"></td>
+                        <td data-bind="text: car().licenceNumber"></td>
+                        <td data-bind="text: saleContract().price"></td>
                     </tr>
                 </tbody>
             </table>
         </div>
-        <div id="sell-modal" class="modal fade" data-bind="showModal: saleTransaction, with: saleTransaction">
-            <!-- ko with: saleContract -->
+        <div id="sell-modal" class="modal fade" data-bind="showModal: saleForm, with: saleForm">
             <div class="modal-header">
-                <a class="close" data-bind="click: $root.cancel">×</a>
+                <a class="close" data-bind="click: cancel">×</a>
                 <h3>Sell car <span data-bind="text: car.licenceNumber"></span></h3>
             </div>
-            <div class="modal-body">
+            <div class="modal-body" data-bind="with: saleContract">
                 <form class="form-horizontal">
                     <div class="control-group">
                         <label class="control-label">Customer name</label>
@@ -78,10 +77,9 @@
                 </form>
             </div>
            <div class="modal-footer">
-                <a href="#" class="btn" data-bind="click: $root.cancel">Cancel</a>
-                <a href="#" class="btn btn-primary" data-bind="click: $root.confirm">Sell</a>
+                <a href="#" class="btn" data-bind="click: cancel">Cancel</a>
+                <a href="#" class="btn btn-primary" data-bind="click: confirm">Sell</a>
             </div>
-            <!-- /ko -->
          </div>
     </div>
 </div>

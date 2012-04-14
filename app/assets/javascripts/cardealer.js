@@ -1,39 +1,50 @@
 $(document).ready(function() {
-    var SaleContract = function(data) {
+    var CarSale = function(data) {
+        this.car = ko.observable();
+        this.price = ko.observable();
+        this.saleContract = ko.observable();
         ko.mapping.fromJS(data, {}, this);
     };
-    var VendibleCar = function(data) {
-        ko.mapping.fromJS(data, {}, this);
-    };
-    var SaleTransaction = function(vendibleCar) {
-        this.vendibleCar = vendibleCar;
-        this.saleContract = new SaleContract({car: vendibleCar.car, customer: "", price: ""});
+    var SaleContract = function() {
+        this.customer = ko.observable();
+        this.price = ko.observable();
     };
 
     var CarDealerViewModel = function() {
         var self = this;
-        self.vendibleCars = ko.observableArray();
-        self.saleContracts = ko.observableArray();
-        self.saleTransaction = ko.observable();
-        self.sell = function(vendibleCar) {
-            self.saleTransaction(new SaleTransaction(vendibleCar));
-        };
-        self.confirm = function() {
-            self.saleContracts.push(self.saleTransaction().saleContract);
-            self.vendibleCars.remove(self.saleTransaction().vendibleCar);
-            self.saleTransaction(null);
-        };
-        self.cancel = function() {
-            self.saleTransaction(null);
-        };
-
-        // Get initial cars
-        $.get("/vendible_cars", function(data) {
-            _.each(data, function(obj) {
-                self.vendibleCars.push(new VendibleCar(obj));
-            });
+        self.carSales = ko.observableArray();
+        self.openSales = ko.computed(function() {
+            return _.filter(self.carSales(), function(sale) { return !sale.saleContract() });
         });
+        self.finishedSales = ko.computed(function() {
+            return _.filter(self.carSales(), function(sale) { return !!sale.saleContract() });
+        });
+        self.saleForm = ko.observable();
+        self.sell = function(sale) {
+            self.saleForm(new SaleFormViewModel(sale, self));
+        };
+        self.fetch = function() {
+            $.get("/car_sales", function(data) {
+                _.each(data, function(obj) {
+                    self.carSales.push(new CarSale(obj));
+                });
+            });
+        }
     };
+
+    var SaleFormViewModel = function(sale, container) {
+        self.car = sale.car();
+        self.saleContract = new SaleContract;
+        self.confirm = function() {
+            $.post("/car_sales/" + sale._id() + "/sale_contract", function() {
+                sale.saleContract(self.saleContract);
+                container(null);
+            });
+       };
+        self.cancel = function() {
+            container(null);
+        };
+     }
 
     ko.bindingHandlers.showModal = {
         init: function(element, valueAccessor) {
@@ -48,5 +59,7 @@ $(document).ready(function() {
                 }
     };
 
-    ko.applyBindings(new CarDealerViewModel());
+    var viewModel = new CarDealerViewModel;
+    viewModel.fetch();
+    ko.applyBindings(viewModel);
 });

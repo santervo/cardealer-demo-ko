@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class VendibleCarTest < ActiveSupport::TestCase
+class CarSaleTest < ActiveSupport::TestCase
 	should validate_presence_of :price
 	should validate_numericality_of :price
 

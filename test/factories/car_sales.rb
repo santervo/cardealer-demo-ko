@@ -1,5 +1,5 @@
 FactoryGirl.define do
-    factory :vendible_car do
+    factory :car_sale do
         price 9500
         car
     end

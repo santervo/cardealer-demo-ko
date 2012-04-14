@@ -3,5 +3,5 @@ require File.expand_path('../../config/environment', __FILE__)
 require 'rails/test_help'
 
 class ActiveSupport::TestCase
-    VendibleCar.delete_all
+    CarSale.delete_all
 end

@@ -1,7 +1,8 @@
 CardealerDemoKo::Application.routes.draw do
     root :to => "app#index"
 
-    resources :vendible_cars
+    match 'car_sales' => 'car_sales#index'
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

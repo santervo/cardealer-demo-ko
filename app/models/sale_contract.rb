@@ -3,8 +3,7 @@ class SaleContract
 
     field :customer, type: String
     field :price, type: Float
-    embeds_one :car
 
-    validates_presence_of :customer, :price, :car
+    validates_presence_of :customer, :price
     validates_numericality_of :price
 end
