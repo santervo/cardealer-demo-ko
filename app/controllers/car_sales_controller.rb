@@ -6,7 +6,7 @@ class CarSalesController < ApplicationController
 
     def save_contract
         @car_sale = CarSale.find(params[:id])
-        @car_sale.update_attributes!(sale_contract: params[:sale_contract])
+        @car_sale.update_attributes!(saleContract: params[:saleContract])
         render json: {}
     end
 end

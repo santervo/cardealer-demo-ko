@@ -26,7 +26,7 @@ CarDealer.ApplicationViewModel = function() {
         self.saleForm(new CarDealer.SaleFormViewModel(sale, self.saleForm));
     };
     self.fetch = function() {
-        $.get("/car_sales", function(data) {
+        $.get("/carSales", function(data) {
             _.each(data, function(obj) {
                 self.carSales.push(new CarDealer.CarSale(obj));
             });
@@ -38,8 +38,8 @@ CarDealer.SaleFormViewModel = function(sale, container) {
     self.car = sale.car();
     self.saleContract = new CarDealer.SaleContract;
     self.confirm = function() {
-        var path = "/car_sales/" + sale._id() + "/sale_contract";
-        var data = {sale_contract: ko.mapping.toJS(self.saleContract)};
+        var path = "/carSales/" + sale._id() + "/saleContract";
+        var data = {saleContract: ko.mapping.toJS(self.saleContract)};
         $.post(path, data, self.saveSuccess);
     };
     self.saveSuccess = function() {
