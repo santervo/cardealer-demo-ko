@@ -23,7 +23,7 @@ class CarSalesControllerTest < ActionController::TestCase
     end
 
     should "save contract" do
-        post :create_sale_contract, car_sale_id: @car_sale.id, saleContract: {customer: "Matti", price: 9000}
+        post :create_sale_contract, car_sale_id: @car_sale.id, sale_contract: {customer: "Matti", price: 9000}
         @car_sale.reload
 
         assert_response :success
