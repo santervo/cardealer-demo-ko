@@ -1,9 +1,9 @@
 CardealerDemoKo::Application.routes.draw do
     root :to => "app#index"
 
-    match 'carSales' => 'car_sales#index'
-
-    match 'carSales/:id/saleContract' => 'car_sales#save_contract'
+    resources :car_sales, only: [:index, :create] do
+        match "/sale_contract" => "car_sales#create_sale_contract"
+    end
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

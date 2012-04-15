@@ -6,13 +6,13 @@ class CarSalesControllerTest < ActionController::TestCase
     end
 
     should "route to index" do
-        assert_recognizes({controller: "car_sales", action: "index"}, "carSales")
+        assert_recognizes({controller: "car_sales", action: "index"}, "car_sales")
     end
 
     should "route to save_contract" do
         assert_recognizes(
-            {controller: "car_sales", action: "save_contract", id: "XYZ"}, 
-            {path: "carSales/XYZ/saleContract", method: :post})
+            {controller: "car_sales", action: "create_sale_contract", car_sale_id: "XYZ"}, 
+            {path: "car_sales/XYZ/sale_contract", method: :post})
     end
 
     should "return list of sales" do
@@ -23,7 +23,7 @@ class CarSalesControllerTest < ActionController::TestCase
     end
 
     should "save contract" do
-        post :save_contract, id: @car_sale.id, saleContract: {customer: "Matti", price: 9000}
+        post :create_sale_contract, car_sale_id: @car_sale.id, saleContract: {customer: "Matti", price: 9000}
         @car_sale.reload
 
         assert_response :success
