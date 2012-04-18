@@ -4,7 +4,7 @@ Demo application built with Knockout.js, Rails and Mongo DB. Layout is done usin
 
 ## Description
 
-Single page application which is designed for a car sales company to manage cars in sale or sold.
+Single page application which is designed for a car sales company to manage vendible and sold cars.
 
 Cars are modeled in single MongoDB document:
 
